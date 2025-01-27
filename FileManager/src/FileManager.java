@@ -33,6 +33,11 @@ public class FileManager {
             case 4:
                 deleteFile(fileName);
                 break;
+            case 5:
+                System.out.println("Enter content to append to the file:");
+                String contentToAppend = scanner.nextLine();
+                appendToFile(fileName, contentToAppend);
+                break;
             default:
                 System.out.println("Invalid choice. Exiting.");
         }
@@ -50,6 +55,16 @@ public class FileManager {
             }
         } catch (IOException e) {
             System.out.println("An error occurred while creating the file.");
+            e.printStackTrace();
+        }
+    }
+
+    public static void appendToFile(String fileName, String content) {
+        try (FileWriter writer = new FileWriter(fileName, true)) { // "true" enables append mode
+            writer.write(content);
+            System.out.println("Successfully appended to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred while appending to the file.");
             e.printStackTrace();
         }
     }
